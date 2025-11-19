@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidCompressor | Shrink your videos, keep the quality ✨</title>
+    
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background blobs -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="brand-logo">
+                <i class="fa-solid fa-scissors" style="color: var(--primary);"></i> VidCompressor
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How it Works</a>
+                <a href="#faq">FAQ</a>
+            </div>
+            <a href="#compress-tool" class="btn btn-primary nav-cta">Try Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="section hero">
+        <div class="container">
+            <div class="hero" style="padding: 0; gap: 40px;">
+                <div class="hero-content reveal active">
+                    <h1>Compress your videos in the browser <span style="font-size: 0.8em;">✂️</span></h1>
+                    <p style="margin-bottom: 30px;">
+                        Upload your file, choose quality, and download a lighter video — without losing visual quality.
+                        Fast, secure, and super cute.
+                    </p>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="#compress-tool" class="btn btn-primary">Start Compressing</a>
+                        <a href="#how-it-works" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal active">
+                    <div class="hero-card-mockup">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <div style="width: 40px; height: 40px; background: #fee2e2; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ef4444;">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">my_vacation.mp4</div>
+                                <div style="font-size: 0.75rem; color: #94a3b8;">Processing...</div>
+                            </div>
+                        </div>
+                        <div class="mock-progress-bar">
+                            <div class="mock-progress-fill"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.8rem; color: #94a3b8;">
+                            <span>24 MB</span>
+                            <span><i class="fa-solid fa-arrow-right"></i> 4.2 MB</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload / Compress tool -->
+    <section id="compress-tool" class="section upload-section">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2 class="gradient-text">Try it right here</h2>
+                <p style="margin-bottom: 40px;">No signup required. Just drop your file.</p>
+            </div>
+
+            <div class="upload-card reveal">
+                <input type="file" id="videoInput" accept="video/*" style="display: none;">
+                
+                <div class="upload-area" id="dropZone">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
+                    <h3>Click to browse or drag file here</h3>
+                    <p class="file-info" id="fileInfo">No file selected</p>
+                </div>
+
+                <span class="warning-text">Recommended: up to ~2 GB. Larger files use desktop tools.</span>
+
+                <div class="controls">
+                    <div>
+                        <label for="qualitySelect">Compression Level</label>
+                        <select id="qualitySelect">
+                            <option value="high">High Quality (CRF 18) - Best Looking</option>
+                            <option value="balanced" selected>Balanced (CRF 20) - Recommended</option>
+                            <option value="small">Small Size (CRF 23) - For Socials</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="resolutionSelect">Resolution (Optional)</label>
+                        <select id="resolutionSelect">
+                            <option value="original">Keep Original</option>
+                            <option value="1080">1080p</option>
+                            <option value="720">720p</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="compressBtn" class="btn btn-primary compress-btn">Compress Video</button>
+
+                <div class="progress-container" id="progressContainer">
+                    <div class="status-text">
+                        <span id="statusText">Initializing...</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <div class="result-area" id="resultArea">
+                    <div style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-light);">
+                        Compression complete! You saved <strong style="color: var(--secondary);">~64%</strong> space.
+                    </div>
+                    <a href="#" id="downloadBtn" class="btn btn-primary btn-disabled">
+                        <i class="fa-solid fa-download"></i> Download Result
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2>How it works</h2>
+                <p>Three simple steps to smaller files.</p>
+            </div>
+            <div class="steps-grid reveal">
+                <div class="step-card">
+                    <span class="step-icon">📂</span>
+                    <h3>1. Upload</h3>
+                    <p>Select any video file from your device. We support MP4, MOV, and AVI.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-icon">⚙️</span>
+                    <h3>2. Choose Settings</h3>
+                    <p>Pick 'Balanced' for the best mix of size and quality, or go smaller.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-icon">✨</span>
+                    <h3>3. Compress</h3>
+                    <p>Our engine processes your video right in the browser.</p>
+                </div>
+                <div class="step-card">
+                    <span class="step-icon">💾</span>
+                    <h3>4. Download</h3>
+                    <p>Save your new, lightweight video instantly. No watermarks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section" style="background: rgba(255,255,255,0.4);">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2>Why use VidCompressor?</h2>
+            </div>
+            <div class="features-grid reveal">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-globe"></i></div>
+                    <h3>Browser Based</h3>
+                    <p>No bulky software to install. Works on Chrome, Safari, and Edge.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-eye"></i></div>
+                    <h3>Visually Lossless</h3>
+                    <p>Smart algorithms reduce file size without making your video look blocky.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Privacy First</h3>
+                    <p>Your files are processed locally (simulated in this demo) and stay safe.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed so you can get back to creating content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="text-center reveal">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my video uploaded to a server?
+                        <i class="fa-solid fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p style="padding-top: 10px;">
+                            For the real version using FFmpeg.wasm, the processing happens locally in your browser!
+                            In this demo, no file actually leaves your computer.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is the max file size?
+                        <i class="fa-solid fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p style="padding-top: 10px;">
+                            We recommend files under 2GB for browser performance.
+                            For anything larger (&gt;3GB), desktop software is usually more stable.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Will I lose video quality?
+                        <i class="fa-solid fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p style="padding-top: 10px;">
+                            If you choose "Balanced" or "High Quality", the visual difference is negligible.
+                            "Smaller Size" might show slight artifacts but saves huge space.
+                        </p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I use this on mobile?
+                        <i class="fa-solid fa-chevron-down faq-toggle"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p style="padding-top: 10px;">
+                            Yes! The interface is fully responsive. However, processing large 4K videos on older phones might be slow.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <div style="font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; color: var(--dark);">
+                VidCompressor
+            </div>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">Built for creators who care about quality ❤️</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+            <div style="margin-top: 30px; font-size: 0.8rem; color: #cbd5e1;">
+                &copy; 2025 VidCompressor. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Your JS -->
+    <script src="script.js"></script>
+</body>
+</html>
